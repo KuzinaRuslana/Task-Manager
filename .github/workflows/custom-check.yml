@@ -20,19 +20,20 @@ jobs:
           postgresql version: '16'
           postgresql db: task_manager_vhv3
           postgresql user: task_manager_vhv3_user
-          postgresql password: testpassword
+          postgresql password: ${{ secrets.DB_PASSWORD }}
 
       - name: Install project
         run: make install
 
       - name: Set up environment
         run: |
+          echo "APP_KEY=${{ secrets.APP_KEY }}" >> .env
           echo "DB_CONNECTION=pgsql" >> .env
           echo "DB_HOST=127.0.0.1" >> .env
           echo "DB_PORT=5432" >> .env
           echo "DB_DATABASE=task_manager_vhv3" >> .env
           echo "DB_USERNAME=task_manager_vhv3_user" >> .env
-          echo "DB_PASSWORD=testpassword" >> .env
+          echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
 
       - name: Run migrations
         run: php artisan migrate --force
