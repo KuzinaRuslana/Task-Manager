@@ -13,10 +13,10 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('task_statuses', TaskStatusController::class)
-    ->only(['store', 'update', 'destroy'])
-    ->middleware('auth');
+    ->only(['index']);
 
 Route::resource('task_statuses', TaskStatusController::class)
-    ->except(['create', 'edit', 'store', 'update', 'destroy']);
+    ->only(['create', 'store', 'edit', 'update', 'destroy'])
+    ->middleware('auth');
 
 require __DIR__.'/auth.php';
