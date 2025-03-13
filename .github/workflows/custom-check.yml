@@ -1,18 +1,44 @@
 name: My check
+
 on:
   push
+
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: '8.3'
+
+      - name: Start PostgreSQL
+        uses: harmon758/postgresql-action@v1
+        with:
+          postgresql version: '16'
+          postgresql db: task_manager_vhv3
+          postgresql user: task_manager_vhv3_user
+          postgresql password: testpassword
+
       - name: Install project
         run: make install
+
+      - name: Set up environment
+        run: |
+          echo "DB_CONNECTION=pgsql" >> .env
+          echo "DB_HOST=127.0.0.1" >> .env
+          echo "DB_PORT=5432" >> .env
+          echo "DB_DATABASE=task_manager_vhv3" >> .env
+          echo "DB_USERNAME=task_manager_vhv3_user" >> .env
+          echo "DB_PASSWORD=testpassword" >> .env
+
+      - name: Run migrations
+        run: php artisan migrate --force
+
       - name: Run linter
         run: make lint
+
       - name: Run tests
         run: make test
