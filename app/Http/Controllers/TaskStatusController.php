@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 
 class TaskStatusController extends Controller
 {
-    public function __construct()
-    {
-    }
-
     public function index()
     {
         $statuses = TaskStatus::paginate();

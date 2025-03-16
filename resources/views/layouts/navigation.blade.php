@@ -15,8 +15,8 @@
             @else
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf
-                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ml-2">
-                        Выйти
+                    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
+                        Выход
                     </button>
                 </form>
             @endguest
@@ -25,7 +25,7 @@
         <div class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1">
             <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                 <li>
-                    <a href="Задачи" class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0">
+                    <a href="{{ route('tasks.index') }}" class="block py-2 pl-3 pr-4 text-gray-700 hover:text-blue-700 lg:p-0">
                         Задачи
                     </a>
                 </li>
