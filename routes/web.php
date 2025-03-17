@@ -13,7 +13,12 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('task_statuses', TaskStatusController::class)
-    ->middleware('auth');
+    ->only(['index', 'show']);
+
+Route::middleware('auth')->group(function () {
+    Route::resource('task_statuses', TaskStatusController::class)
+    ->only(['create', 'store', 'edit', 'update', 'destroy']);
+});
 
 Route::resource('tasks', TaskController::class)
     ->only(['index', 'show']);
