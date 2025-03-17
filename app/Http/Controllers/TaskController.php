@@ -17,7 +17,7 @@ class TaskController extends Controller
         $statuses = TaskStatus::pluck('name', 'id');
         $creators = User::pluck('name', 'id');
         $executors = User::pluck('name', 'id');
-    
+
         return view('tasks.index', compact('tasks', 'statuses', 'creators', 'executors'));
     }
 
@@ -70,10 +70,10 @@ class TaskController extends Controller
         }
 
         $statuses = TaskStatus::pluck('name', 'id');
-        $execs = User::pluck('name', 'id');
+        $users = User::pluck('name', 'id');
         $labels = Label::pluck('name', 'id');
 
-        return view('tasks.edit', compact('task', 'statuses', 'execs', 'labels'));
+        return view('tasks.edit', compact('task', 'statuses', 'users', 'labels'));
     }
 
     public function update(Request $request, Task $task)
@@ -101,11 +101,7 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
-        if (Auth::id() !== $task->created_by_id) {
-            return redirect()->route('tasks.index')->withErrors('Вы можете удалить только свои задачи.');
-        }
-
         $task->delete();
-        return redirect()->route('tasks.index')->with('success', 'Задача удалена.');
+        return redirect()->route('tasks.index')->with('success', 'Задача успешно удалена.');
     }
 }

@@ -60,7 +60,7 @@ class TaskStatusController extends Controller
     public function destroy(TaskStatus $taskStatus)
     {
         if ($taskStatus->tasks()->exists()) {
-            flash(__('Невозможно удалить статус, так как он используется в задачах.'))->error();
+            flash(__('Не удалось удалить статус'))->error();
             return back();
         }
 
