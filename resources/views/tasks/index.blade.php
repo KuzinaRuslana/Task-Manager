@@ -83,13 +83,16 @@
                                 <a href="{{ route('tasks.edit', $task->id) }}" class="text-blue-600 hover:text-blue-900">
                                     Изменить
                                 </a>
-                                <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display: inline;">
-                                    @csrf
-                                    @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Вы уверены?');">
-                                        Удалить
-                                    </button>
-                                </form>
+
+                                @if(Auth::id() === $task->created_by_id)
+                                    <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" style="display: inline;">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-red-600 hover:text-red-900" onclick="return confirm('Вы уверены?');">
+                                            Удалить
+                                        </button>
+                                    </form>
+                                @endif
                             </td>
                         @endauth
                     </tr>

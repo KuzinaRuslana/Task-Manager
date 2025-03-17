@@ -12,16 +12,14 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Маршруты для статусов задач
 Route::resource('task_statuses', TaskStatusController::class)
     ->middleware('auth');
 
-// Маршруты для задач
 Route::resource('tasks', TaskController::class)
-    ->middleware('auth')
-    ->except(['show']);
+    ->only(['index', 'show']);
 
-Route::get('/tasks/{task}', [TaskController::class, 'show'])
-    ->name('tasks.show');
+Route::resource('tasks', TaskController::class)
+    ->only(['create', 'store', 'edit', 'update', 'destroy'])
+    ->middleware('auth');
 
 require __DIR__.'/auth.php';
