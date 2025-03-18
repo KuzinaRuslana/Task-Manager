@@ -55,10 +55,11 @@
                         <label for="labels">Метки</label>
                     </div>
                     <div>
-                        <select class="rounded border-gray-300 w-1/3 h-32" name="labels[]" id="labels" multiple>
+                        <select class="form-control rounded border-gray-300 w-1/3 h-32" name="labels[]" id="labels" multiple>
                             @foreach($labels as $id => $name)
-                                <option value="{{ $id }}" {{ in_array($id, $task->labels->pluck('id')->toArray()) ? 'selected' : '' }}>
-                                    {{ $name }}
+                                <option value="{{ $id }}" 
+                                    {{ collect(old('labels', $task->labels->pluck('id')))->contains($id) ? 'selected' : '' }}>
+                                        {{ $name }}
                                 </option>
                             @endforeach
                         </select>
