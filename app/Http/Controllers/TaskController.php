@@ -101,6 +101,10 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
+        if (Auth::user()->id !== $task->created_by_id) {
+            return redirect()->route('tasks.index');
+        }
+
         $task->delete();
         return redirect()->route('tasks.index')->with('success', 'Задача успешно удалена.');
     }
