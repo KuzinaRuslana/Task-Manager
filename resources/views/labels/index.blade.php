@@ -1,10 +1,8 @@
 @extends('layouts.app')
 
 @section('content')
-    <section class="bg-white dark:bg-gray-900">
-        <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
             <div class="grid col-span-full">
-                <h1 class="mb-5 text-3xl font-bold">Метки</h1>
+                <h1 class="text-3xl font-bold mb-5">Метки</h1>
 
                 @auth
                     <div class="mb-4">
@@ -35,7 +33,7 @@
                                 <td class="border px-4 py-2">{{ $label->created_at->format('d.m.Y') }}</td>
                                 @auth
                                     <td class="border px-4 py-2">
-                                        <a href="{{ route('labels.edit', $label) }}" class="text-blue-500 hover:underline">Редактировать</a>
+                                        <a href="{{ route('labels.edit', $label) }}" class="text-blue-500 hover:underline">Изменить</a>
                                         <form action="{{ route('labels.destroy', $label) }}" method="POST" class="inline">
                                             @csrf
                                             @method('DELETE')
@@ -51,5 +49,4 @@
                 </table>
             </div>
         </div>
-    </section>
 @endsection

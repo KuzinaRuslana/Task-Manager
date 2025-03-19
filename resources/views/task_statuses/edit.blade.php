@@ -1,7 +1,5 @@
 @extends('layouts.app')
 
-@section('title', 'Изменение статуса')
-
 @section('content')
     <div class="grid col-span-full">
         <h1 class="text-3xl font-bold mb-5">Изменение статуса</h1>
