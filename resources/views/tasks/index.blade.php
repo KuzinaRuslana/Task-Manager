@@ -6,41 +6,43 @@
     <div class="grid col-span-full">
         <h1 class="text-3xl font-bold mb-5">Задачи</h1>
 
-        <div class="mb-4">
-            <form method="GET" action="{{ route('tasks.index') }}">
-                <div>
-                    <select name="filter[status_id]">
-                        <option value="">Статус</option>
-                        @foreach ($statuses as $id => $status)
-                            <option value="{{ $id }}" {{ request('filter.status_id') == $id ? 'selected' : '' }}>
-                                {{ $status }}
-                            </option>
-                        @endforeach
-                    </select>
+        <div class="w-full flex items-center">
+            <div>
+                <form method="GET" action="{{ route('tasks.index') }}">
+                    <div class="flex">
+                        <select class="rounded border-gray-300" name="filter[status_id]">
+                            <option value="">Статус</option>
+                            @foreach($statuses as $status)
+                                <option value="{{ $status->id }}" {{ request('filter.status_id') == $status->id ? 'selected' : '' }}>
+                                    {{ $status->name }}
+                                </option>
+                            @endforeach
+                        </select>
 
-                    <select name="filter[created_by_id]">
-                        <option value="">Автор</option>
-                        @foreach ($creators as $id => $creator)
-                            <option value="{{ $id }}" {{ request('filter.created_by_id') == $id ? 'selected' : '' }}>
-                                {{ $creator }}
-                            </option>
-                        @endforeach
-                    </select>
+                        <select class="rounded border-gray-300" name="filter[created_by_id]">
+                            <option value="">Автор</option>
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}" {{ request('filter.created_by_id') == $user->id ? 'selected' : '' }}>
+                                    {{ $user->name }}
+                                </option>
+                            @endforeach
+                        </select>
 
-                    <select name="filter[assigned_to_id]">
-                        <option value="">Исполнитель</option>
-                        @foreach ($executors as $id => $exec)
-                            <option value="{{ $id }}" {{ request('filter.assigned_to_id') == $id ? 'selected' : '' }}>
-                                {{ $exec }}
-                            </option>
-                        @endforeach
-                    </select>
+                        <select class="rounded border-gray-300" name="filter[assigned_to_id]">
+                            <option value="">Исполнитель</option>
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}" {{ request('filter.assigned_to_id') == $user->id ? 'selected' : '' }}>
+                                    {{ $user->name }}
+                                </option>
+                            @endforeach
+                        </select>
 
-                    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2" type="submit">
-                        Применить
-                    </button>
-                </div>
-            </form>
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2" type="submit">
+                            Применить
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
 
         @auth
