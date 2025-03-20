@@ -23,7 +23,7 @@ class TaskController extends Controller
             ])
             ->with(['status', 'creator', 'executor'])
             ->paginate(10);
-    
+
         return view('tasks.index', [
             'tasks' => $tasks,
             'statuses' => TaskStatus::all(),
