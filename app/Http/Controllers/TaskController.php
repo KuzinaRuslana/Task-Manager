@@ -22,7 +22,7 @@ class TaskController extends Controller
                 AllowedFilter::exact('assigned_to_id'),
             ])
             ->with(['status', 'creator', 'executor'])
-            ->paginate(10);
+            ->paginate(15);
 
         return view('tasks.index', [
             'tasks' => $tasks,
