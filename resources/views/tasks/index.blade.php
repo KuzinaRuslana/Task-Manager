@@ -6,7 +6,7 @@
     <div class="grid col-span-full">
         <h1 class="text-3xl font-bold mb-5">Задачи</h1>
 
-        <div class="w-full flex items-center">
+        <div class="w-full flex justify-between items-center mb-4">
             <div>
                 <form method="GET" action="{{ route('tasks.index') }}">
                     <div class="flex">
@@ -37,28 +37,26 @@
                             @endforeach
                         </select>
 
-                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2" type="submit">
+                        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded ml-2">
                             Применить
                         </button>
                     </div>
                 </form>
             </div>
-        </div>
 
-        @auth
-            <div>
+            @auth
                 <a href="{{ route('tasks.create') }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                     Создать задачу
                 </a>
-            </div>
-        @endauth
+            @endauth
+        </div>
 
         <table class="mt-4 w-full border-collapse border border-gray-300">
             <thead class="bg-gray-200 border-b-2 border-gray-400">
                 <tr>
                     <th class="border px-4 py-2">ID</th>
                     <th class="border px-4 py-2">Статус</th>
-                    <th class="border px-4 py-2">Название</th>
+                    <th class="border px-4 py-2">Имя</th>
                     <th class="border px-4 py-2">Автор</th>
                     <th class="border px-4 py-2">Исполнитель</th>
                     <th class="border px-4 py-2">Дата создания</th>
