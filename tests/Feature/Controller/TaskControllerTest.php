@@ -24,25 +24,19 @@ class TaskControllerTest extends TestCase
         ]);
     }
 
-    public function testGuestCanViewTasks()
+    public function testIndex()
     {
         $response = $this->get(route('tasks.index'));
         $response->assertStatus(200);
     }
 
-    public function testGuestCanViewTask()
+    public function testShow()
     {
         $response = $this->get(route('tasks.show', $this->task));
         $response->assertStatus(200);
     }
 
-    public function testGuestCannotCreateTask()
-    {
-        $response = $this->get(route('tasks.create'));
-        $response->assertRedirect(route('login'));
-    }
-
-    public function testAuthenticatedUserCanCreateTask()
+    public function testCreate()
     {
         $this->actingAs($this->user);
         $taskData = Task::factory()->make()->toArray();
@@ -53,20 +47,26 @@ class TaskControllerTest extends TestCase
         $this->assertDatabaseHas('tasks', ['name' => $taskData['name']]);
     }
 
-    public function testGuestCannotEditTask()
+    public function testGuestCannotCreate()
     {
-        $response = $this->get(route('tasks.edit', $this->task));
+        $response = $this->get(route('tasks.create'));
         $response->assertRedirect(route('login'));
     }
 
-    public function testCreatorCanEditTask()
+    public function testEdit()
     {
         $this->actingAs($this->user);
         $response = $this->get(route('tasks.edit', $this->task));
         $response->assertStatus(200);
     }
 
-    public function testCreatorCanUpdateTask()
+    public function testGuestCannotEdit()
+    {
+        $response = $this->get(route('tasks.edit', $this->task));
+        $response->assertRedirect(route('login'));
+    }
+
+    public function testUpdate()
     {
         $this->actingAs($this->user);
         $newData = [
@@ -82,7 +82,7 @@ class TaskControllerTest extends TestCase
         $this->assertDatabaseHas('tasks', ['id' => $this->task->id, 'name' => 'Updated Task Name']);
     }
 
-    public function testCreatorCanDeleteTask()
+    public function testDelete()
     {
         $this->actingAs($this->user);
         $response = $this->delete(route('tasks.destroy', $this->task));
@@ -91,7 +91,7 @@ class TaskControllerTest extends TestCase
         $this->assertSoftDeleted($this->task);
     }
 
-    public function testNonCreatorCannotDeleteTask()
+    public function testNonCreatorCannotDelete()
     {
         $anotherUser = User::factory()->create();
         $this->actingAs($anotherUser);

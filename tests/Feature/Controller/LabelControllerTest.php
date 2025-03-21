@@ -28,14 +28,14 @@ class LabelControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
-    public function testCreatePageIsAccessibleForAuthenticatedUser()
+    public function testCreate()
     {
         $this->actingAs($this->user);
         $response = $this->get(route('labels.create'));
         $response->assertStatus(200);
     }
 
-    public function testGuestCannotAccessCreatePage()
+    public function testGuestCannotCreate()
     {
         $response = $this->get(route('labels.create'));
         $response->assertRedirect(route('login'));
@@ -52,7 +52,7 @@ class LabelControllerTest extends TestCase
         $response->assertRedirect(route('labels.index'));
     }
 
-    public function testGuestCannotStoreLabel()
+    public function testGuestCannotStore()
     {
         $data = Label::factory()->make()->toArray();
 
@@ -62,14 +62,14 @@ class LabelControllerTest extends TestCase
         $response->assertRedirect(route('login'));
     }
 
-    public function testEditPageIsAccessibleForAuthenticatedUser()
+    public function testEdit()
     {
         $this->actingAs($this->user);
         $response = $this->get(route('labels.edit', $this->label));
         $response->assertStatus(200);
     }
 
-    public function testGuestCannotAccessEditPage()
+    public function testGuestCannotEdit()
     {
         $response = $this->get(route('labels.edit', $this->label));
         $response->assertRedirect(route('login'));
@@ -86,7 +86,7 @@ class LabelControllerTest extends TestCase
         $response->assertRedirect(route('labels.index'));
     }
 
-    public function testGuestCannotUpdateLabel()
+    public function testGuestCannotUpdate()
     {
         $oldData = $this->label->only(['name', 'description']);
         $newData = ['name' => 'New Name', 'description' => 'New Description'];
@@ -97,7 +97,7 @@ class LabelControllerTest extends TestCase
         $this->assertDatabaseMissing('labels', $newData);
     }
 
-    public function testDestroy()
+    public function testDelete()
     {
         $this->actingAs($this->user);
 
@@ -109,7 +109,7 @@ class LabelControllerTest extends TestCase
         $response->assertRedirect(route('labels.index'));
     }
 
-    public function testGuestCannotDeleteLabel()
+    public function testGuestCannotDelete()
     {
         $this->assertDatabaseHas('labels', ['id' => $this->label->id]);
 
