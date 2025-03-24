@@ -15,7 +15,7 @@
             @endif
 
     <div class="w-50">
-        <form action="{{ route('task_statuses.store') }}" method="POST">
+        <for action="{{ route('task_statuses.store') }}" method="POST">
             @csrf
 
             <div class="flex flex-col">
@@ -33,6 +33,6 @@
                         </button>
                     </div>
                 </div>
-            </form>
-    </div>
+        </div>
+    </for>
 @endsection
