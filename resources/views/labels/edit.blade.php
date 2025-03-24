@@ -21,9 +21,7 @@
                     <label for="description">Описание</label>
                 </div>
                 <div class="mt-2">
-                    <textarea class="rounded border-gray-300 w-1/3 h-32" name="description" id="description">
-                        {{ old('description', $label->description) }}
-                    </textare>
+                    <textarea class="rounded border-gray-300 w-1/3 h-32" name="description" id="description">{{ old('description', $label->description) }}</textarea>
                 </div>
 
                 <div class="mt-2">
