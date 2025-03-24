@@ -75,10 +75,6 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
-        if (Auth::id() !== $task->created_by_id) {
-            return redirect()->route('tasks.index')->withErrors('Вы можете редактировать только свои задачи.');
-        }
-
         $statuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
         $labels = Label::pluck('name', 'id');
@@ -88,10 +84,6 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
-        if (Auth::id() !== $task->created_by_id) {
-            return redirect()->route('tasks.index')->withErrors('Вы можете редактировать только свои задачи.');
-        }
-
         $data = $request->validate([
             'name' => 'required|max:255|unique:tasks,name,' . $task->id,
             'description' => 'nullable|string',
@@ -111,10 +103,6 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
-        if (Auth::user()->id !== $task->created_by_id) {
-            return redirect()->route('tasks.index');
-        }
-
         $task->delete();
         return redirect()->route('tasks.index')->with('success', 'Задача успешно удалена.');
     }
