@@ -15,7 +15,7 @@
             @endif
 
     <div class="w-50">
-        <for action="{{ route('task_statuses.store') }}" method="POST">
+        <form action="{{ route('task_statuses.store') }}" method="POST">
             @csrf
 
             <div class="flex flex-col">
@@ -26,13 +26,15 @@
                     <div class="rounded border-gray-300 w-1/3">
                         <input type="text" name="name" id="name" value="{{ old('name', $status->name) }}">
                     </div>
+                </div>
 
-                    <div class="mt-2"></div>
-                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" type="submit">
+                    <div class="mt-2">
+                        <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                             Создать
                         </button>
                     </div>
                 </div>
+            </form>
         </div>
-    </for>
+    </div>
 @endsection
