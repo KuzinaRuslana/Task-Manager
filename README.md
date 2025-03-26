@@ -14,9 +14,9 @@ Meet this simple yet nice task manager. It will keep your tasks in perfect order
 https://php-project-57-7ajk.onrender.com
 
 ### Requirements
-PHP version >= 8.2
-Composer
-PostgreSQL
++ PHP version >= 8.2
++ Composer
++ PostgreSQL
 
 ### Installation and usage
 1. Create and install the project using Git and Composer:
