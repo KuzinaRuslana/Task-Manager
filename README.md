@@ -14,7 +14,7 @@ Meet this simple yet nice task manager. It will keep your tasks in perfect order
 https://php-project-57-7ajk.onrender.com
 
 ### Requirements
-PHP version >= 8.1
+PHP version >= 8.2
 Composer
 PostgreSQL
 
