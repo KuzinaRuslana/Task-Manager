@@ -39,8 +39,8 @@
                 </a>
             @endif
 
-            <x-primary-button type="submit" class="ms-3">
-                {{ __('Войти') }}
+            <x-primary-button class="ms-3">
+                {{ __('auth.login') }}
             </x-primary-button>
         </div>
     </form>
