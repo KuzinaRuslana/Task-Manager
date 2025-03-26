@@ -34,4 +34,4 @@ cp .env.example .env
 ```bash
 make start
 ```
-5. The project is now available on http://localhost:8000!
+5. Yay! The project is now available on http://localhost:8000!
