@@ -45,7 +45,7 @@
             </a>
 
             <x-primary-button class="ms-4">
-                {{ __('auth.register') }}
+                {{ __('Зарегистрировать') }}
             </x-primary-button>
         </div>
     </form>
