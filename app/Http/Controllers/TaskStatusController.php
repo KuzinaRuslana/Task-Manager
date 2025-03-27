@@ -52,7 +52,7 @@ class TaskStatusController extends Controller
         ], $messages);
 
         $taskStatus->fill($data)->save();
-        flash(__('Статус успешно обновлён'));
+        flash(__('Статус успешно изменён'));
         return redirect()
             ->route('task_statuses.index');
     }
