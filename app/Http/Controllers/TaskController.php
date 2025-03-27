@@ -110,6 +110,7 @@ class TaskController extends Controller
     public function destroy(Task $task)
     {
         $task->delete();
-        return redirect()->route('tasks.index')->with('success', 'Задача успешно удалена');
+        flash('Задача успешно удалена')->success();
+        return redirect()->route('tasks.index');
     }
 }
