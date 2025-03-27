@@ -83,12 +83,14 @@
                                 <a href="{{ route('tasks.edit', $task->id) }}" class="text-blue-500 hover:underline">Изменить</a>
 
                                 @if(Auth::id() === $task->created_by_id)
-                                    <form action="{{ route('tasks.destroy', $task->id) }}" method="POST" class="inline">
+                                    <a href="{{ route('tasks.destroy', $task->id) }}"
+                                        class="text-red-500 hover:underline"
+                                        onclick="event.preventDefault(); if (confirm('Вы уверены?')) document.getElementById('delete-task-{{ $task->id }}').submit();">
+                                        Удалить
+                                    </a>
+                                    <form id="delete-task-{{ $task->id }}" action="{{ route('tasks.destroy', $task->id) }}" method="POST" class="hidden">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="text-red-500 hover:underline" onclick="return confirm('Вы уверены?');">
-                                            Удалить
-                                        </button>
                                     </form>
                                 @endif
                             </td>

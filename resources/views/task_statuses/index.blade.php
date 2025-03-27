@@ -33,13 +33,15 @@
                         <td class="border px-4 py-2">{{ $status->created_at->format('d.m.Y') }}</td>
                         @auth
                             <td class="border px-4 py-2">
-                                <a href="{{ route('task_statuses.edit', $status->id) }}" class="text-blue-500 hover:underline">Изменить</a>
-                                <form action="{{ route('task_statuses.destroy', $status->id) }}" method="POST" class="inline">
+                               <a href="{{ route('task_statuses.edit', $status->id) }}" class="text-blue-500 hover:underline">Изменить</a>
+                               <a href="{{ route('task_statuses.destroy', $status->id) }}"
+                                    class="text-red-500 hover:underline"
+                                    onclick="event.preventDefault(); if (confirm('Вы уверены?')) document.getElementById('delete-status-{{ $status->id }}').submit();">
+                                    Удалить
+                                </a>
+                                <form id="delete-status-{{ $status->id }}" action="{{ route('task_statuses.destroy', $status->id) }}" method="POST" class="hidden">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-500 hover:underline" onclick="return confirm('Вы уверены?');">
-                                        Удалить
-                                    </button>
                                 </form>
                             </td>
                         @endauth

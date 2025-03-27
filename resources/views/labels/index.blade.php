@@ -34,12 +34,14 @@
                                 @auth
                                     <td class="border px-4 py-2">
                                         <a href="{{ route('labels.edit', $label) }}" class="text-blue-500 hover:underline">Изменить</a>
-                                        <form action="{{ route('labels.destroy', $label) }}" method="POST" class="inline">
+                                        <a href="{{ route('labels.destroy', $label) }}"
+                                            class="text-red-500 hover:underline"
+                                            onclick="event.preventDefault(); if (confirm('Удалить метку?')) document.getElementById('delete-label-{{ $label->id }}').submit();">
+                                            Удалить
+                                        </a>
+                                        <form id="delete-label-{{ $label->id }}" action="{{ route('labels.destroy', $label) }}" method="POST" class="hidden">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-500 hover:underline" onclick="return confirm('Удалить метку?')">
-                                                Удалить
-                                            </button>
                                         </form>
                                     </td>
                                 @endauth
