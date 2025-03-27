@@ -42,7 +42,7 @@ class TaskControllerTest extends TestCase
         $taskData = Task::factory()->make()->toArray();
 
         $response = $this->post(route('tasks.store'), $taskData);
-        
+
         $response->assertRedirect();
         $this->assertDatabaseHas('tasks', ['name' => $taskData['name']]);
     }
@@ -75,10 +75,10 @@ class TaskControllerTest extends TestCase
             'status_id' => $this->task->status_id,
             'assigned_to_id' => $this->task->assigned_to_id
         ];
-        
+
         $response = $this->patch(route('tasks.update', $this->task), $newData);
         $response->assertRedirect();
-        
+
         $this->assertDatabaseHas('tasks', ['id' => $this->task->id, 'name' => 'Updated Task Name']);
     }
 
@@ -86,7 +86,7 @@ class TaskControllerTest extends TestCase
     {
         $this->actingAs($this->user);
         $response = $this->delete(route('tasks.destroy', $this->task));
-        
+
         $response->assertRedirect();
         $this->assertSoftDeleted($this->task);
     }
@@ -97,7 +97,7 @@ class TaskControllerTest extends TestCase
         $this->actingAs($anotherUser);
 
         $response = $this->delete(route('tasks.destroy', $this->task));
-        
+
         $this->assertDatabaseHas('tasks', ['id' => $this->task->id]);
         $response->assertRedirect(route('tasks.index'));
     }
