@@ -97,7 +97,7 @@ class TaskController extends Controller
         $labels = collect($request->input('labels'))->filter();
         $task->labels()->sync(Label::find($labels));
 
-        flash("Задача успешно обновлена");
+        flash("Задача успешно изменена");
         return redirect()->route('tasks.index');
     }
 
