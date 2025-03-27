@@ -20,10 +20,15 @@ class LabelController extends Controller
 
     public function store(Request $request)
     {
+        $messages = [
+            'name.required' => 'Это обязательное поле',
+            'name.unique' => 'Метка с таким именем уже существует'
+          ];
+        
         $data = $request->validate([
             'name' => 'required|unique:labels|max:255',
             'description' => 'nullable|string',
-        ]);
+        ], $messages);
 
         Label::create($data);
         flash('Метка успешно создана')->success();
