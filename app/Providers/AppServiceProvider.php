@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Route;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -22,5 +24,9 @@ class AppServiceProvider extends ServiceProvider
         if ($this->app->environment('production')) {
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
+
+        Route::get('/dashboard', function () {
+            return Redirect::to('/');
+        });
     }
 }
