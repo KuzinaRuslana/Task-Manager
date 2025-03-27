@@ -3,4 +3,7 @@ parameters:
     paths:
         - code
     excludePaths:
-        analyseAndScan: []
+        analyseAndScan:
+            - ../routes/channels.php (?)
+            - ../app/Exceptions/Handler.php (?)
+            - ../app/Http/Kernel.php (?)
