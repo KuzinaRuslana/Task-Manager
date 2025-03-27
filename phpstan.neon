@@ -1,9 +1,0 @@
-parameters:
-    level: 1
-    paths:
-        - code
-    excludePaths:
-        analyseAndScan:
-            - ../routes/channels.php (?)
-            - ../app/Exceptions/Handler.php (?)
-            - ../app/Http/Kernel.php (?)
