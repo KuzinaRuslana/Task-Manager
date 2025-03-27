@@ -84,12 +84,18 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
+
+        $messages = [
+            'name.required' => 'Это обязательное поле',
+            'status_id' => 'Это обязательное поле',
+        ];
+
         $data = $request->validate([
             'name' => 'required|max:255|unique:tasks,name,' . $task->id,
             'description' => 'nullable|string',
             'status_id' => 'required|exists:task_statuses,id',
             'assigned_to_id' => 'nullable|exists:users,id',
-        ]);
+        ], $messages);
 
         $task->fill($data);
         $task->save();

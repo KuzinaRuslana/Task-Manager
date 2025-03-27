@@ -17,6 +17,10 @@
                     <input class="rounded border-gray-300 w-1/3" type="text" name="name" id="name" value="{{ old('name') }}">
                 </div>
 
+                @error('name')
+                    <div class="text-red-500 mt-1">{{ $message }}</div>
+                @enderror
+
                 <div class="mt-2">
                     <label for="description">Описание</label>
                 </div>
@@ -37,6 +41,10 @@
                         @endforeach
                     </select>
                 </div>
+
+                @error('status_id')
+                    <div class="text-red-500 mt-1">{{ $message }}</div>
+                @enderror
 
                 <div class="mt-2">
                     <label for="assigned_to_id">Исполнитель</label>
