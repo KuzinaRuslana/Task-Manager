@@ -7,6 +7,8 @@ use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Auth\Notifications\VerifyEmail;
+use Illuminate\Support\Facades\Notification;
 use Tests\TestCase;
 
 class EmailVerificationTest extends TestCase
@@ -54,5 +56,23 @@ class EmailVerificationTest extends TestCase
         $this->actingAs($user)->get($verificationUrl);
 
         $this->assertFalse($user->fresh()->hasVerifiedEmail());
+    }
+
+    public function testGuestIsRedirectedFromVerificationPage()
+    {
+        $response = $this->get('/verify-email');
+
+        $response->assertRedirect('/login');
+    }
+
+    public function testVerifiedUserIsRedirectedFromVerificationPage()
+    {
+        $user = User::factory()->create([
+            'email_verified_at' => now(),
+        ]);
+
+        $response = $this->actingAs($user)->get('/verify-email');
+
+        $response->assertRedirect('/dashboard');
     }
 }

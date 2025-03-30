@@ -117,4 +117,20 @@ class LabelControllerTest extends TestCase
 
         $this->assertDatabaseHas('labels', ['id' => $this->label->id]);
     }
+
+    public function testCannotDeleteLabelWithTasks()
+    {
+        $this->actingAs($this->user);
+
+        $task = \App\Models\Task::factory()->create();
+        $task->labels()->attach($this->label);
+
+        $this->assertDatabaseHas('labels', ['id' => $this->label->id]);
+
+        $response = $this->delete(route('labels.destroy', $this->label));
+
+        $this->assertDatabaseHas('labels', ['id' => $this->label->id]);
+
+        $response->assertRedirect(route('labels.index'));
+    }
 }

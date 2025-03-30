@@ -101,4 +101,15 @@ class TaskControllerTest extends TestCase
         $this->assertDatabaseHas('tasks', ['id' => $this->task->id]);
         $response->assertRedirect(route('tasks.index'));
     }
+
+    public function testGuestCannotDelete()
+    {
+        $this->assertDatabaseHas('tasks', ['id' => $this->task->id]);
+
+        $response = $this->delete(route('tasks.destroy', $this->task));
+
+        $response->assertRedirect(route('login'));
+
+        $this->assertDatabaseHas('tasks', ['id' => $this->task->id]);
+    }
 }
