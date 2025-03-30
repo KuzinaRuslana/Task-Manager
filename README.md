@@ -7,6 +7,9 @@
 ### Code Climate Maintainability Badge
 [![Maintainability](https://api.codeclimate.com/v1/badges/ad241999f31196ec5e43/maintainability)](https://codeclimate.com/github/KuzinaRuslana/php-project-57/maintainability)
 
+### Code Climate Test Coverage Badge
+[![Test Coverage](https://api.codeclimate.com/v1/badges/ad241999f31196ec5e43/test_coverage)](https://codeclimate.com/github/KuzinaRuslana/php-project-57/test_coverage)
+
 ### What is Task Manager
 Meet this simple yet nice task manager. It will keep your tasks in perfect order!
 
