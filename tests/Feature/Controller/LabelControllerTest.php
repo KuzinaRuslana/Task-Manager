@@ -113,8 +113,9 @@ class LabelControllerTest extends TestCase
     {
         $this->assertDatabaseHas('labels', ['id' => $this->label->id]);
 
-        $this->delete(route('labels.destroy', $this->label));
+        $response = $this->delete(route('labels.destroy', $this->label));
 
+        $response->assertRedirect(route('login'));
         $this->assertDatabaseHas('labels', ['id' => $this->label->id]);
     }
 
@@ -126,11 +127,8 @@ class LabelControllerTest extends TestCase
         $task->labels()->attach($this->label);
 
         $this->assertDatabaseHas('labels', ['id' => $this->label->id]);
-
         $response = $this->delete(route('labels.destroy', $this->label));
-
         $this->assertDatabaseHas('labels', ['id' => $this->label->id]);
-
         $response->assertRedirect(route('labels.index'));
     }
 }

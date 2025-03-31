@@ -7,6 +7,12 @@ use Illuminate\Http\Request;
 
 class TaskStatusController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+        $this->authorizeResource(TaskStatus::class, 'task_status');
+    }
+
     public function index()
     {
         $statuses = TaskStatus::paginate();

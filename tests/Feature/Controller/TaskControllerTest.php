@@ -36,6 +36,13 @@ class TaskControllerTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function testCreatePage()
+    {
+        $this->actingAs($this->user);
+        $response = $this->get(route('tasks.create'));
+        $response->assertStatus(200);
+    }
+
     public function testCreate()
     {
         $this->actingAs($this->user);
@@ -49,7 +56,7 @@ class TaskControllerTest extends TestCase
 
     public function testGuestCannotCreate()
     {
-        $response = $this->get(route('tasks.create'));
+        $response = $this->post(route('tasks.store'), []);
         $response->assertRedirect(route('login'));
     }
 
@@ -98,18 +105,16 @@ class TaskControllerTest extends TestCase
 
         $response = $this->delete(route('tasks.destroy', $this->task));
 
+        $response->assertForbidden();
         $this->assertDatabaseHas('tasks', ['id' => $this->task->id]);
-        $response->assertRedirect(route('tasks.index'));
     }
 
     public function testGuestCannotDelete()
     {
         $this->assertDatabaseHas('tasks', ['id' => $this->task->id]);
-
         $response = $this->delete(route('tasks.destroy', $this->task));
 
         $response->assertRedirect(route('login'));
-
         $this->assertDatabaseHas('tasks', ['id' => $this->task->id]);
     }
 }

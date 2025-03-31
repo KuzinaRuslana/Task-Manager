@@ -13,6 +13,12 @@ use Spatie\QueryBuilder\AllowedFilter;
 
 class TaskController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth')->except(['index', 'show']);
+        $this->authorizeResource(Task::class);
+    }
+
     public function index(Request $request)
     {
         $tasks = QueryBuilder::for(Task::class)
@@ -33,6 +39,8 @@ class TaskController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Task::class);
+
         $task = new Task();
         $statuses = TaskStatus::pluck('name', 'id');
         $executors = User::pluck('name', 'id');
@@ -43,6 +51,8 @@ class TaskController extends Controller
 
     public function store(Request $request)
     {
+        $this->authorize('create', Task::class);
+
         $messages = [
             'name.required' => 'Это обязательное поле',
             'name.unique' => 'Задача с таким именем уже существует',
@@ -75,6 +85,8 @@ class TaskController extends Controller
 
     public function edit(Task $task)
     {
+        $this->authorize('update', $task);
+
         $statuses = TaskStatus::pluck('name', 'id');
         $users = User::pluck('name', 'id');
         $labels = Label::pluck('name', 'id');
@@ -84,18 +96,14 @@ class TaskController extends Controller
 
     public function update(Request $request, Task $task)
     {
-
-        $messages = [
-            'name.required' => 'Это обязательное поле',
-            'status_id' => 'Это обязательное поле',
-        ];
+        $this->authorize('update', $task);
 
         $data = $request->validate([
             'name' => 'required|max:255|unique:tasks,name,' . $task->id,
             'description' => 'nullable|string',
             'status_id' => 'required|exists:task_statuses,id',
             'assigned_to_id' => 'nullable|exists:users,id',
-        ], $messages);
+        ]);
 
         $task->fill($data);
         $task->save();
@@ -109,6 +117,8 @@ class TaskController extends Controller
 
     public function destroy(Task $task)
     {
+        $this->authorize('delete', $task);
+
         $task->delete();
         flash('Задача успешно удалена')->success();
         return redirect()->route('tasks.index');
