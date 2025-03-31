@@ -17,16 +17,16 @@ class LabelPolicy
 
     public function create(User $user): bool
     {
-        return $user !== null;
+        return (bool)$user;
     }
 
     public function update(User $user, Label $label): bool
     {
-        return $user !== null;
+        return (bool)$user;
     }
 
     public function delete(User $user, Label $label): bool
     {
-        return $user !== null;
+        return (bool)$user;
     }
 }

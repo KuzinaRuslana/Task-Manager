@@ -17,21 +17,21 @@ class TaskStatusPolicy
 
     public function view(?User $user, TaskStatus $taskStatus): bool
     {
-        return true;
+        return (bool)$user;
     }
 
     public function create(User $user): bool
     {
-        return true;
+        return (bool)$user;
     }
 
     public function update(User $user, TaskStatus $taskStatus): bool
     {
-        return true;
+        return (bool)$user;
     }
 
     public function delete(User $user, TaskStatus $taskStatus): bool
     {
-        return true;
+        return (bool)$user;
     }
 }
