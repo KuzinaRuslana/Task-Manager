@@ -6,6 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 use App\Models\Label;
 use App\Models\User;
+use App\Models\Task;
 
 class LabelControllerTest extends TestCase
 {
@@ -123,7 +124,7 @@ class LabelControllerTest extends TestCase
     {
         $this->actingAs($this->user);
 
-        $task = \App\Models\Task::factory()->create();
+        $task = Task::factory()->create();
         $task->labels()->attach($this->label);
 
         $this->assertDatabaseHas('labels', ['id' => $this->label->id]);
