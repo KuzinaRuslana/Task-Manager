@@ -21,8 +21,8 @@ class TaskFactory extends Factory
         return [
             'name' => fake()->unique()->name(),
             'description' => fake()->text(),
-            'status_id' => TaskStatus::factory()->create()->id, // Передаём ID, а не объект
-            'created_by_id' => User::factory()->create()->id,   // То же самое для пользователей
+            'status_id' => TaskStatus::factory()->create()->id,
+            'created_by_id' => User::factory()->create()->id,
             'assigned_to_id' => User::factory()->create()->id
         ];
     }
