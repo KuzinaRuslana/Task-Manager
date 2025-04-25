@@ -28,11 +28,11 @@ git clone https://github.com/KuzinaRuslana/php-project-57.git
 cd php-project-57
 make install
 ```
-2. Create .env file:
+2. Create `.env` file:
 ```bash
 cp .env.example .env
 ```
-3. Open .env and use your database configs.
+3. Open `.env` and use your database configs.
 4. Run your local server:
 ```bash
 make start
